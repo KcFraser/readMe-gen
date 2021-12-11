@@ -1,22 +1,23 @@
 // TODO: Include packages needed for this application
 const inquirer = require('inquirer');
 const fs = require('fs');
-const { error } = require('console');
+const markdown = require ('./utils/generateMarkdown')
+
 // TODO: Create an array of questions for user input
 inquirer.prompt([
     {
         type: "input",
-        name: "Title",
+        name: "title",
         message: "What is the name of this project?"
     },
     {
         type: "input",
-        name: "Description",
+        name: "description",
         message: "Describe this project?"
     },
     {
         type: "input",
-        name: "Installation",
+        name: "installation",
         message: "Please enter instructions on how this project will be used."  
     },
     {
@@ -26,40 +27,32 @@ inquirer.prompt([
     },
     {
         type: "input",
-        name: "Credits",
-        message: "Please enter list od collaborators." 
+        name: "credits",
+        message: "Please enter list collaborators." 
     },
     {
         type: "checkbox",
-        name: "License",
+        name: "license",
         message: "What License will you use?",
-        choices: ["ISC", "NCSA", "lgpl-3.0", "gpl-3.0","MIT", "ZLIB",]
+        choices: ["ISC", "NCSA", "lgpl_3.0", "gpl_3.0","MIT", "ZLIB", "Apache_2.0"]
     },
     {
         type: "input",
-        name: "Test",
+        name: "test",
         message: "How would someone test this application?" 
     },
     {
         type: "input",
-        name: "Contributing",
+        name: "contributing",
         message: "Please add example of what you might want to add." 
+    },
+    {
+        type: "input",
+        name: "github",
+        message: "Please enter your Github user name."
     },
 
     
-]).then(data => fs.writeFile("ReadME.md",`# ${data.Title}
-## Descrition
-${data.Description}
-## Installation
-${data.Installation}
-
-` , error => {
-    if (error) throw error
-})
-)
-// TODO: Create a function to write README file
-
-// TODO: Create a function to initialize app
-
-
-// Function call to initialize app
+]).then((data) => {
+    fs.writeFile("ReadME.md", markdown(data), err => err ? console.log(err) : console.log('Read me created!')
+)});

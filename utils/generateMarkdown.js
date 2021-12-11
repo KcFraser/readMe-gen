@@ -1,4 +1,5 @@
-# hey
+const generateMarkdown = (data) => {
+    return `# ${data.title}
 
 ## Table of Contents
 * [Descrition](#Description)
@@ -13,27 +14,31 @@
 -----------------------------------------------------------------
 
 ## Descrition
-what
+${data.description}
 
 ## Installation
-up
+${data.installation}
 
 ## Usage
-onay
+${data.usage}
 
 ## Credits
-sure
+${data.credits}
 
 ## License
-[![License](https://img.shields.io/badge/License-ISC,NCSA,lgpl_3.0,gpl_3.0,MIT,ZLIB,Apache_2.0-blue.svg)](https://opensource.org/licenses/ISC,NCSA,lgpl_3.0,gpl_3.0,MIT,ZLIB,Apache_2.0)
+[![License](https://img.shields.io/badge/License-${data.license}-blue.svg)](https://opensource.org/licenses/${data.license})
 
 
 ## Contributing
-you right 
+${data.contributing}
 
 ## Test
-yup
+${data.test}
 
 ## Github
-https://github.com/kcfraser  
+https://github.com/${data.github}  
     
+`
+}
+
+module.exports = generateMarkdown
